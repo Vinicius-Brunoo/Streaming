@@ -46,6 +46,53 @@ php artisan serve
 
 Se preferir usar um MySQL local, altere `DB_PORT`, `DB_USERNAME` e `DB_PASSWORD` no `.env`.
 
+## Deploy no AWS Learner Lab (EC2)
+
+O arquivo `docker-compose.prod.yml` publica a aplicacao na porta 80 e mantem o
+MySQL e os uploads em volumes persistentes.
+
+Na instancia Amazon Linux 2023, instale Docker, Git e o plugin Compose:
+
+```bash
+sudo dnf update -y
+sudo dnf install -y docker git
+sudo systemctl enable --now docker
+sudo mkdir -p /usr/local/lib/docker/cli-plugins
+sudo curl -SL https://github.com/docker/compose/releases/download/v5.6.0/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose
+sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+sudo docker compose version
+```
+
+Depois clone o repositorio e suba a aplicacao:
+
+```bash
+git clone https://github.com/Vinicius-Brunoo/Streaming.git
+cd Streaming
+sudo docker compose -f docker-compose.prod.yml up -d --build
+```
+
+Acesse `http://IP_PUBLICO_DA_EC2`. O Security Group da instancia precisa liberar
+TCP 80 (HTTP). Nao libere a porta 3306: o MySQL fica acessivel somente pela rede
+interna do Docker.
+
+Para conferir o deploy:
+
+```bash
+sudo docker compose -f docker-compose.prod.yml ps
+sudo docker compose -f docker-compose.prod.yml logs --tail=100 app
+```
+
+Para aplicar uma atualizacao enviada ao GitHub:
+
+```bash
+git pull
+sudo docker compose -f docker-compose.prod.yml up -d --build
+```
+
+As senhas padrao do banco servem apenas para o laboratorio. Para troca-las,
+defina `DB_PASSWORD` e `MYSQL_ROOT_PASSWORD` em um arquivo `.env` na EC2 antes de
+subir os containers.
+
 ## Usuario de teste
 
 O seeder cria um usuario administrador:
