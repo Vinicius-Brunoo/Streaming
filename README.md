@@ -4,6 +4,19 @@ Projeto CRUD Laravel para a atividade **T2 - Projeto CRUD Laravel**.
 
 Tema implementado: **Sistema de Streaming de Musica**, com cadastro de musicas e playlists relacionadas.
 
+## Entrega de seguranca e pentest
+
+O [checklist da atividade](docs/ENTREGA.md) relaciona os requisitos da imagem,
+os arquivos para entregar e as pendencias de implantacao/apresentacao.
+O [relatorio de pentest](docs/pentest/2026-11-04/RELATORIO.md) documenta sete
+achados da avaliacao de **04/11/2026**, com mapeamento ao **OWASP Top 10 2025**
+e matriz de cobertura das dez categorias, acrescentados na revisao documental de **19/11/2026**.
+Ha versoes [Word](docs/pentest/2026-11-04/RELATORIO.docx) e
+[HTML](docs/pentest/2026-11-04/RELATORIO.html).
+
+A implantacao da ferramenta de relatorios e o cadastro dos achados ainda precisam
+ser comprovados. Esta revisao nao realizou nova coleta remota nem aplicou correcoes.
+
 ## Requisitos atendidos
 
 - Laravel com rotas, controllers, models, migrations e views Blade.
