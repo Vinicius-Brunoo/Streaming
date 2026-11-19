@@ -18,6 +18,7 @@ O CRUD e a análise de sete achados já estão documentados. A entrega completa 
 ## Arquivos para entregar
 
 - [Relatório Word](pentest/2026-11-04/RELATORIO.docx), [HTML para leitura/impressão](pentest/2026-11-04/RELATORIO.html) e [fonte Markdown](pentest/2026-11-04/RELATORIO.md).
+- O relatório inclui **Preparação para reproduzir os ataques manualmente** e **Passo a passo manual — F01–F07**, com procedimentos locais, evidências a coletar e limpeza. Os roteiros foram documentados em 19/11; não foram executados como novo pentest.
 - [Mapeamento e cobertura OWASP 2025](pentest/2026-11-04/metodologia-owasp-2025.json).
 - [Fichas para cadastro no Pentest-Docs](pentest/2026-11-04/achados-pentest-docs.json).
 - [Evidências originais](pentest/2026-11-04/evidencias/), [registro da revisão](pentest/2026-11-04/REVISAO-2026-11-19.md) e [manifesto SHA-256](pentest/2026-11-04/SHA256SUMS.txt).
@@ -65,7 +66,7 @@ python3 docs/pentest/2026-11-04/repro/validate-deliverables.py
 O renderizador PHP requer as dependências Composer instaladas. Como alternativa offline, se o pacote Python `markdown` já estiver disponível:
 
 ```bash
-python3 -c 'import pathlib, markdown; print(markdown.markdown(pathlib.Path("docs/pentest/2026-11-04/RELATORIO.md").read_text(), extensions=["tables", "fenced_code"]))' | php docs/pentest/2026-11-04/repro/render-report.php --body-from-stdin
+python3 -c 'import pathlib, markdown; print(markdown.markdown(pathlib.Path("docs/pentest/2026-11-04/RELATORIO.md").read_text(), extensions=["tables", "fenced_code", "sane_lists"]))' | php docs/pentest/2026-11-04/repro/render-report.php --body-from-stdin
 ```
 
 Use `--write-manifest` apenas após uma atualização documental intencional; a execução sem essa opção confere o manifesto existente. Não sobrescrever resultados de coleta ou de testes para representar uma nova avaliação: armazenar novos resultados em outra pasta datada.
